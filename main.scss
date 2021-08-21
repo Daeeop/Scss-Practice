@@ -2,7 +2,18 @@ $color : royalblue;
 
 // SCSS 에서 제공하는 중첩 기능
 .container {
-  h1 {
-    color: $color;
+  ul {
+    list-style: none;
+    li {
+      font-size: 40px;
+      text-decoration: none;
+      .name {
+        color: royalblue;
+      }
+      .age {
+        color: orange;
+      }
+    }
   }
 }
+
