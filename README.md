@@ -126,6 +126,41 @@ SCSS 에서는 & 기호를 사용하여 중첩 기능을 그대로 사용 할 �
 
 # 중첩된 속성
 
+`SCSS 에서는 선택자를 중첩기능이 있고 속성 네임스페이스도 중첩 해주는 기능이 있다.`
+
+```css
+.box {
+  font-weight: bold;
+  font-family: sans-serif;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+```
+이러한 CSS 코드가 있을때 `font , margin , padding` 과 같은 NameSpace를 반복적으로 작성 하였다.
+
+```css
+.box {
+    font :{
+        weight : bold;
+        family : sans-serif;
+        
+    };
+    
+    margin: {
+        top: 10px;
+        bottom : 20px;
+    };
+    
+    padding: {
+      left: 20px;
+      right: 20px;
+    };
+}
+```
+SCSS 에서는 이런식으로 코드를 작성하여 속성에 NameSpace에 대해 중첩기능을 제공 한다.
+
 # 변수(Variable)
 
 `SCSS 문법에서는 CSS 와는 다르게 속성을 변수에 담아 둘 수 있다.`
@@ -159,7 +194,7 @@ $size : 100px;
     }
 }
 
-이런식으로 위치 ,너비 같은 수치가 항상 똑같아야 할때는 그 수치를 변수로 만들어 사용하는게 편리하다.
+이런식으로 위치,너비 같은 수치가 항상 똑같아야 할때는 그 수치를 변수로 만들어 사용하는게 편리하다.
 ```
 
 ### 변수 주의사항
@@ -172,6 +207,52 @@ $size : 100px;
 2. 선언된 변수에 값을 재 할당 가능하다. (유효범위 주의)
 
 2.1 전역변수로 변수를 선언 하고 재할당을 중괄호 안에서 했으면 그 중괄호가 재할당된 값의 유효 범위 (나머지는 기존 값)
+
+```
+
+# 산술 연산 
+
+`SCSS 에서는 산술 연산자 (+ , - , * , / , %) 이용 가능`
+
+```css
+
+div {
+
+    $number : 20px;
+    width: 20px + 20px;
+    height: 40px - 10px;
+    font-size: 10px * 2;
+    // 나누기 연산자 이용하는 방법
+    margin: (40px / 2);
+    bottom: $number / 2;
+    top: (16px + 12px) / 3;
+    padding: 20px % 3;
+
+}
+
+나누기 연산자는 표준 CSS 에서 font속성의 단축 속성으로 슬러쉬 기호로 구분하는 문법이 있다.
+그렇기 때문에 일반적으로 동작 하지 않기 때문에 괄호로 묶거나 , 수치를 변수에 할당 하거나 , 다른 연산자와 함께 사용 해야 한다.
+
+```
+
+```css
+div {
+
+  width: 40px;
+  height: 30px;
+  font-size: 20px;
+  margin: 20px;
+  bottom: 10px;
+  top: 9.3333333333px;
+  padding: 2px;
+
+}
+
+< 주의사항 >
+
+  산술 연산은 같은 단위 끼리만 가능 
+
+  width: 100% - 200px; // 불가
 
 
 ```
