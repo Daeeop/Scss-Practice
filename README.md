@@ -256,3 +256,193 @@ div {
 
 
 ```
+
+# 재활용(Mixins)
+
+`SCSS 에서는 여러가지 속성을 Mixin 이라는 어노테이션을 이용해 재활용 하여 사용 할 수 있다.`
+
+``` html
+<div class="container">
+   <div class="item">
+     Mixin!
+  </div>
+</div>  
+```
+```css
+.container {
+
+  width: 200px;
+  height: 200px;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.container .item {
+
+  width: 100px;
+  height: 100px;
+  background-color: royalblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+컨테이너 클래스 선택자와 그 자식인 아이템 클래스 선택자에 공통으로 들어가는 속성이 있다.
+  display: flex;
+  justify-content: center;
+  align-items: center;
+```
+
+SCSS 에서는 공통으로 쓰이는 속성에 대해서 Mixin 이라는 기능을 제공 한다.
+
+```css
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+이렇게 정의를 해두고 사용 할때는 @include 어노테이션을 붙여서 사용 할 수 있다.
+
+.container {
+    @include center;
+    .item {
+        @include center;
+    }
+}
+
+위의 코드를 CSS로 변환 하면 아래에 코드 이다.
+
+.container {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.container .item {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+```
+
+근데 만약 재활용 하여 사용하려는 속성의 값을 바꾸고 싶은 경우가 생길 수도 있는데  
+자바스크립트의 함수의 매개변수 처럼 SCSS 에서도 매개변수를 사용 할 수 있다.
+
+```css
+@mixin center($position) {
+    display: flex;
+    justify-content: $position;
+    align-items: $position;
+}
+
+이렇게 매개변수를 이용하면 속성을 재활용 하되 그 안에 값은 우리가 마음대로 지정 할 수 있다.
+
+.container {
+    @include center(flex-end);
+    .item {
+        @include center(center);
+    }
+}
+
+위의 코드를 CSS 문법으로 변환 하면 
+
+.container {
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+}
+
+.container .item {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+하지만, 이런식으로 Mixin 을 사용하게 되면 우리가 처음에 설정한 기본값이 사라지는데  
+SCSS 에서는 기본값을 설정 할 수 있게 제공 하고 있다.
+
+@mixin center($position: center) {
+    display: flex;
+    justify-content: $position;
+    align-items: $position;
+}
+
+.container {
+    @include center(flex-end);
+    .item {
+        @include center;
+    }
+}
+
+이렇게 인수를 명시 하지 않으면 알아서 기본값으로 인식 한다.
+```
+
+```scss
+또 자바스크립트의 함수와 동일하게 쉼표로 구분하여 여러가지의 매개변수를 입력 할 수 있다.
+
+@mixin center($position : center , $color : red) {
+
+    display: flex;
+    justify-content: $position;
+    align-items: $position;
+    background-color : $color;
+
+}
+
+.container {
+    @include center(flex-end);
+    .item {
+        @include center;
+    }
+}
+
+위의 코드를 CSS로 변환 하면
+
+.container {
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  background-color: red;
+
+}
+
+.container .item {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+
+}
+
+인수로 $color에 대한 색상을 명시하지 않았기 때문에 기본값으로 지정된 red가 들어가 있다.
+
+.container {
+  @include center(blue)
+}
+
+만약 위의 코드 처럼 위치에 대한 값은 기본값 색상에 대한 값은 우리가 원하는 값을 넣고 싶을때
+위의 코드는 justify-content , align-items 속성에 대한 값으로 blue가 들어가 오류를 발생 시킨다.
+인수를 넣을때도 매개변수에 순서대로 인수를 넣어야 한다.
+
+이럴 경우에 2가지 방법이 있는데
+
+1. @include center(center , blue) 처럼 기본값을 명시 해주는 방법
+
+2. @include center($color : blue) 처럼 키워드 인수를 사용 하는 방법이 있다.
+ 
+```
