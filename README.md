@@ -446,3 +446,85 @@ SCSS 에서는 기본값을 설정 할 수 있게 제공 하고 있다.
 2. @include center($color : blue) 처럼 키워드 인수를 사용 하는 방법이 있다.
  
 ```
+
+# 반복문
+
+`SCSS 에서도 자바스크립트 처럼 반복문을 사용 할 수 있다.`
+
+```javascript
+자바스크립트 반복문
+
+for(let i = 0; i < 5; i++) {
+  console.log(`${i} 번째 입니다.`);
+}
+
+SCSS 반복문 
+
+@for $i from 1 through 3 {
+    .box:nth-child(#{$i}) {
+        width: 100px * $i; 
+  }
+}
+
+위의 코드를 CSS로 변환하면 아래의 코드가 실행 된다.
+
+.box:nth-child(1) {
+  width: 100px;
+}
+
+.box:nth-child(2) {
+  width: 200px;
+}
+
+.box:nth-child(3) {
+  width: 300px;
+}
+
+```
+
+# 함수
+
+`SCSS 에서 @function 키워드를 이용하여 함수를 사용 할 수 있다.`
+
+```css
+@function height($size , $ratio) {
+  @return $size * $ratio
+}
+
+.box {
+
+  $width: 100px;
+  width: $width;
+  height: height($width , 1/2);
+
+}
+
+.box {
+
+  width: 100px;
+  height: 50px; // height 함수를 통해서 값 설정
+
+}
+
+```
+
+# 색상 내장함수
+
+``` css
+1. mix(red , black); // red + black 조합한 색상을 반환 한다.
+
+2. lighten(red , 10%); // red 컬러를 10% 밝게 만든다.
+
+3. darken(red , 10%); // red 컬러를 10% 어둡게 만든다.
+
+4. saturate(red , 10%); // red 컬러 채도를 10% 높여 준다.
+
+5. desaturate(red , 10%); // red 컬러의 채도를 10% 채도를 낮춰 준다.
+
+6. grayscale($color); // 회색으로 만든다..?
+
+7. invert(red); // red 컬러 색상을 반전 시킨다.. 
+
+8. rgba(red , .5); // red 컬러에 50% 투명도 추가
+
+```
