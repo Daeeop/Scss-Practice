@@ -521,10 +521,24 @@ SCSS 반복문
 
 5. desaturate(red , 10%); // red 컬러의 채도를 10% 채도를 낮춰 준다.
 
-6. grayscale($color); // 회색으로 만든다..?
+6. grayscale(red); // 회색으로 만든다..?
 
 7. invert(red); // red 컬러 색상을 반전 시킨다.. 
 
 8. rgba(red , .5); // red 컬러에 50% 투명도 추가
 
+8-1 표준 CSS : rgba(0,0,0,.5) 
+
+```
+
+# 다른 SCSS 파일 가져오기
+
+```scss
+1. @import url("파일.scss");
+
+2. @import "파일.scss";
+
+3. @import "파일"; 
+
+4. @import "파일" , "파일2";
 ```

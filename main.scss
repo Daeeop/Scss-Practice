@@ -1,19 +1,15 @@
+// @import url("./sub.scss");
+// @import "./sub.scss";
+// @import "./sub";
+@import "./sub" , "./secondScss.scss";
+
+
 $color : royalblue;
 
 // SCSS 에서 제공하는 중첩 기능
 .container {
-  ul {
-    list-style: none;
-    li {
-      font-size: 40px;
-      text-decoration: none;
-      .name {
-        color: royalblue;
-      }
-      .age {
-        color: orange;
-      }
-    }
+  h1 {
+    color: $color;
   }
 }
 
