@@ -531,7 +531,7 @@ SCSS 반복문
 
 ```
 
-# 다른 SCSS 파일 가져오기
+# SCSS 파일에서 다른 SCSS 파일 가져오기
 
 ```scss
 1. @import url("파일.scss");
@@ -541,4 +541,39 @@ SCSS 반복문
 3. @import "파일"; 
 
 4. @import "파일" , "파일2";
+```
+
+# 데이터 타입
+
+`SCSS 에서는 일반 프로그래밍 언어 처럼 데이터 타입이 있다.`
+
+```css
+Number , Boolean , String , null 등과 같은 데이터 타입이 있고
+주의 할 점은 red , blue 같은 색상을 나타내는 문자는 String 데이터가 아니고 $color 데이터 타입 이다.
+
+그리고 배열과 유사한 list 데이터 타입 , 객체와 유사한 map 데이터 타입이 있다.
+@each 라는 키워드를 통해 list , map 데이터들을 반복적으로 출력 할 수 있다.
+
+```
+
+# Mixin 재활용 + Content
+
+```scss
+@mixin left-top {
+   position: relative;
+   top: 0;
+   left: 0;
+   @content;
+}
+
+.box {
+  @include left-top {
+    bottom: 0;
+    right: 0;
+  }
+}
+
+include를 통해 left-top 을 재활용 하고 거기에서 중괄호를 열어 새로운 속성을 추가 했다.
+새롭게 추가된 속성이 @content 영역에 삽입된다.
+
 ```
